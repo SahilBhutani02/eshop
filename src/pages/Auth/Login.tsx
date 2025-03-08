@@ -15,9 +15,7 @@ interface LoginFormValues {
 
 const Login: React.FC = () => {
   const [displayPass, setDisplayPass] = useState(false);
-
   const userData = useSelector((state: any) => state.signup);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,28 +46,26 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-[50%]">
-        <div className="h-screen w-full overflow-hidden">
-          <img
-            src={image}
-            alt="w-full h-full object-cover"
-            className="w-full h-full object-cover"
-          />
-        </div>
+    <div className="flex h-screen dark:bg-gray-800">
+      <div className="hidden md:block md:w-1/2">
+        <img
+          src={image}
+          alt="Login Background"
+          className="w-full h-full object-cover"
+        />
       </div>
-      <div className="flex items-center justify-center  w-[50%]">
-        <div className="border bg-[#f8f9fa] w-full max-w-[400px] shadow-[10px_10px_10px_-1px_black] p-10 rounded-[10px] border-solid border-[black]">
-          <h1 className="text-2xl font-bold mb-5">Login</h1>
+      <div className="flex items-center justify-center w-full md:w-1/2 p-6 md:p-10 ">
+        <div className="border bg-[#f8f9fa] w-full max-w-md shadow-[10px_10px_10px_-1px_black] p-10 rounded-lg border border-black dark:bg-gray-700">
+          <h1 className="text-2xl font-bold mb-5 text-center">Login</h1>
           <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
             onSubmit={(values) => handleSubmit(values)}
           >
             {() => (
-              <Form className="w-full flex flex-col gap-2.5">
+              <Form className="w-full flex flex-col gap-4">
                 <div>
-                  <label htmlFor="email" className="font-semibold mb-2">
+                  <label htmlFor="email" className="font-semibold block mb-2">
                     Email
                   </label>
                   <Field
@@ -77,7 +73,7 @@ const Login: React.FC = () => {
                     name="email"
                     type="text"
                     placeholder="Enter email"
-                    className="w-full border rounded text-base h-[35px] p-3 border-solid border-[#ced4da] focus:border-[#4a90e2]"
+                    className="w-full border rounded h-10 p-3 border-gray-300 focus:border-blue-500"
                   />
                   <ErrorMessage
                     name="email"
@@ -87,7 +83,7 @@ const Login: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="font-semibold mb-2">
+                  <label htmlFor="password" className="font-semibold block mb-2">
                     Password
                   </label>
                   <div className="relative flex items-center">
@@ -96,11 +92,11 @@ const Login: React.FC = () => {
                       name="password"
                       type={displayPass ? "text" : "password"}
                       placeholder="Enter password"
-                      className="w-full border rounded text-base h-[35px] p-3 border-solid border-[#ced4da] focus:border-[#4a90e2] "
+                      className="w-full border rounded h-10 p-3 border-gray-300 focus:border-blue-500 dark:text-black"
                     />
                     <span
                       onClick={showPassword}
-                      className="absolute cursor-pointer right-1"
+                      className="absolute right-1 cursor-pointer"
                     >
                       {!displayPass ? (
                         <FaRegEye color="black" />
@@ -115,21 +111,19 @@ const Login: React.FC = () => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div className="text-red-500 text-right">
+
+                <div className="text-right text-sm text-blue-500">
                   <Link to="/forgotPassword">Forgot Password?</Link>
                 </div>
 
                 <button
                   type="submit"
-                  className=" h-10 bg-[#4a90e2] text-[white] text-base rounded cursor-pointer transition-[background-color] duration-[0.3s] border-[none] hover:bg-[#357abd] mt-5"
+                  className="h-10 bg-blue-500 text-white text-base rounded transition duration-300 hover:bg-blue-700"
                 >
                   Login
                 </button>
-                <p className="text-[0.9rem] text-center mt-4">
-                  Don't have an account?{" "}
-                  <Link to={`/signup`} className="text-blue-500">
-                    SignUp
-                  </Link>
+                <p className="text-sm text-center mt-4">
+                  Don't have an account? <Link to="/signup" className="text-blue-500">Sign Up</Link>
                 </p>
               </Form>
             )}

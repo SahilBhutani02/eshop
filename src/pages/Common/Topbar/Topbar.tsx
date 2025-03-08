@@ -63,6 +63,7 @@ const Topbar: React.FC = () => {
     dispatch(emptyWish())
     dispatch(emptyCart())
     setDropdown(false);
+   
   };
 
   const pathSegment = location?.pathname.split("/")[1];
@@ -152,11 +153,11 @@ const Topbar: React.FC = () => {
               <Link to="/wishlist">
                 <FaRegHeart size={20} />
               </Link>
-              <Link to="/cart" className="superscript">
+              <Link to="/cart" className="flex">
                 <FaCartShopping size={20} />
                 <sup>
                   {cart.length > 0 ? (
-                    <span className="cart-length">{cart.length}</span>
+                    <span className="bg-gray-700 text-[white] ml-[-5px] px-2.5 py-[5px] rounded-[100px]">{cart.length}</span>
                   ) : (
                     ""
                   )}

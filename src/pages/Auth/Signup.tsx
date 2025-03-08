@@ -28,13 +28,8 @@ const Signup: React.FC = () => {
     confirmPassword: "",
   };
 
-  const showPassword = () => {
-    setDisplayPass(!displayPass);
-  };
-
-  const showConfirmPassword = () => {
-    setDisplayConfirmPass(!displayConfirmPass);
-  };
+  const showPassword = () => setDisplayPass(!displayPass);
+  const showConfirmPassword = () => setDisplayConfirmPass(!displayConfirmPass);
 
   const handleSubmit = (values: SignupFormValues) => {
     dispatch(signup(values));
@@ -43,46 +38,32 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-[50%]">
-        <div className="h-screen w-full overflow-hidden">
-          <img
-            src={image}
-            alt="w-full h-full object-cover"
-            className="w-full h-full object-cover"
-          />
-        </div>
+    <div className="flex h-screen dark:bg-gray-800">
+      <div className="hidden md:block md:w-1/2">
+        <img src={image} alt="Login" className="w-full h-full object-cover" />
       </div>
-      <div className="flex items-center justify-center w-[50%]">
-        <div className="border bg-[#f8f9fa] w-full max-w-[400px] shadow-[10px_10px_10px_-1px_black] p-10 rounded-[10px] border-solid border-[black]">
-          <h1 className="text-2xl font-bold mb-5">Sign Up</h1>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={SignupSchema}
-            onSubmit={(values) => handleSubmit(values)}
-          >
+      <div className="flex items-center justify-center w-full md:w-1/2 p-5 ">
+        <div className="bg-[#f8f9fa] w-full max-w-md shadow-[10px_10px_10px_-1px_black] p-10 rounded-lg border border-black dark:bg-gray-700">
+          <h1 className="text-2xl font-bold mb-5 text-center">Sign Up</h1>
+          <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={handleSubmit}>
             {() => (
-              <Form className="w-full flex flex-col gap-2.5">
+              <Form className="w-full flex flex-col gap-4">
                 <div>
-                  <label htmlFor="fullName" className="font-semibold mb-2">
+                  <label htmlFor="fullName" className="font-semibold mb-2 block">
                     Full Name
                   </label>
                   <Field
                     id="fullName"
                     name="fullName"
-                    type="fullName"
+                    type="text"
                     placeholder="Enter Full Name"
-                    className="w-full border rounded text-base h-[35px] p-3 border-solid border-[#ced4da] focus:border-[#4a90e2]"
+                    className="w-full border rounded text-base h-10 p-2 border-gray-300 focus:border-blue-500"
                   />
-                  <ErrorMessage
-                    name="fullName"
-                    component="div"
-                    className="text-red-500 text-sm"
-                  />
+                  <ErrorMessage name="fullName" component="div" className="text-red-500 text-sm" />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="font-semibold mb-2">
+                  <label htmlFor="email" className="font-semibold mb-2 block">
                     Email
                   </label>
                   <Field
@@ -90,17 +71,13 @@ const Signup: React.FC = () => {
                     name="email"
                     type="text"
                     placeholder="Enter email"
-                    className="w-full border rounded text-base h-[35px] p-3 border-solid border-[#ced4da] focus:border-[#4a90e2]"
+                    className="w-full border rounded text-base h-10 p-2 border-gray-300 focus:border-blue-500"
                   />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-red-500 text-sm"
-                  />
+                  <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="font-semibold mb-2">
+                  <label htmlFor="password" className="font-semibold mb-2 block">
                     Password
                   </label>
                   <div className="relative flex items-center">
@@ -109,31 +86,17 @@ const Signup: React.FC = () => {
                       name="password"
                       type={displayPass ? "text" : "password"}
                       placeholder="Enter password"
-                      className="w-full border rounded text-base h-[35px] p-3 border-solid border-[#ced4da] focus:border-[#4a90e2]"
+                      className="w-full border rounded h-10 p-3 border-gray-300 focus:border-blue-500 dark:text-black"
                     />
-                    <label
-                      onClick={showPassword}
-                      className="absolute cursor-pointer right-1"
-                    >
-                      {!displayPass ? (
-                        <FaRegEye color="black" />
-                      ) : (
-                        <FaRegEyeSlash color="black" />
-                      )}
-                    </label>
+                    <span onClick={showPassword} className="absolute right-1 cursor-pointer">
+                      {displayPass ? <FaRegEyeSlash color="black" /> : <FaRegEye color="black" />}
+                    </span>
                   </div>
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="text-red-500 text-sm"
-                  />
+                  <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="confirmPassword"
-                    className="font-semibold mb-2"
-                  >
+                  <label htmlFor="confirmPassword" className="font-semibold mb-2 block">
                     Confirm Password
                   </label>
                   <div className="relative flex items-center">
@@ -142,37 +105,23 @@ const Signup: React.FC = () => {
                       name="confirmPassword"
                       type={displayConfirmPass ? "text" : "password"}
                       placeholder="Enter Confirm Password"
-                      className="w-full border rounded text-base h-[35px] p-3 border-solid border-[#ced4da] focus:border-[#4a90e2]"
+                      className="w-full border rounded h-10 p-3 border-gray-300 focus:border-blue-500 dark:text-black"
                     />
-                    <label
-                      onClick={showConfirmPassword}
-                      className="absolute cursor-pointer right-1"
-                    >
-                      {!displayConfirmPass ? (
-                        <FaRegEye color="black" />
-                      ) : (
-                        <FaRegEyeSlash color="black" />
-                      )}
-                    </label>
+                    <span onClick={showConfirmPassword} className="absolute right-1 cursor-pointer">
+                      {displayConfirmPass ? <FaRegEyeSlash color="black" /> : <FaRegEye color="black" />}
+                    </span>
                   </div>
-                  <ErrorMessage
-                    name="confirmPassword"
-                    component="div"
-                    className="text-red-500 text-sm"
-                  />
+                  <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-sm" />
                 </div>
 
                 <button
                   type="submit"
-                  className=" h-10 bg-[#4a90e2] text-[white] text-base rounded cursor-pointer transition-[background-color] duration-[0.3s] border-[none] hover:bg-[#357abd] mt-5"
+                  className="h-10 bg-blue-500 text-white text-base rounded cursor-pointer transition duration-300 hover:bg-blue-700 mt-5"
                 >
                   Signup
                 </button>
-                <p className="text-[0.9rem] text-center mt-4">
-                  Already have an account?{" "}
-                  <Link to={`/login`} className="text-blue-500">
-                    Login
-                  </Link>
+                <p className="text-sm text-center mt-4">
+                  Already have an account? <Link to={`/login`} className="text-blue-500">Login</Link>
                 </p>
               </Form>
             )}

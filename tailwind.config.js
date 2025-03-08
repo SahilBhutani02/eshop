@@ -35,7 +35,7 @@ const config = {
         "2xl": "1440px",
         xl: "1280px",
         lg: "1024px",
-        ipad: { min: "960px", max: "1023px" },
+        ipad: "960px",
         md: "768px",
         sm: "640px",
         xs: "420px",

@@ -69,29 +69,31 @@ const UserProducts: React.FC = () => {
   const currentItems = filteredData?.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div>
-      {loading ? (
-        <Spinner />
-      ) : filteredData?.length > 0 ? (
-        <>
-          <div className="posts">
-            {currentItems?.map((post: any, index: any) => {
-              return <ProductCard key={post.id} post={post} index={index} />;
-            })}
-          </div>
+    <div className="w-full px-4 ">
+    {loading ? (
+      <Spinner />
+    ) : filteredData?.length > 0 ? (
+      <>
+        <div className="flex flex-wrap">
+          {currentItems?.map((post: any, index: any) => (
+            <ProductCard key={post.id} post={post} index={index} />
+          ))}
+        </div>
+        <div className="mt-6 flex justify-center">
           <Pagination
             currentPage={currentPage}
             totalItems={filteredData?.length}
             itemsPerPage={itemsPerPage}
             onPageChange={(page: any) => setCurrentPage(page)}
           />
-        </>
-      ) : (
-        <div className="empty">
-          <p>No Data Found</p>
         </div>
-      )}
-    </div>
+      </>
+    ) : (
+      <div className="flex flex-col justify-center items-center text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl h-[50vh]">
+        <p>No Data Found</p>
+      </div>
+    )}
+  </div>  
   );
 };
 

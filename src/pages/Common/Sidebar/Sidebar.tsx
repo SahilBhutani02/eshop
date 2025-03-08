@@ -11,17 +11,20 @@ import logo_dark from "../../../assets/images/logo_dark.png";
 import { useContext } from "react";
 import { SidebarContext } from "../../../components/context/SidebarContext";
 
+
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const type = useSelector((state: any) => state.userType);
   const { sidebar, toggleSidebar } = useContext(SidebarContext);
 
+
   const handleLogout = () => {
     navigate("/");
     dispatch(login({}));
     dispatch(signup({}));
     dispatch(userType({ admin: false, user: false }));
+    
   };
 
   return (

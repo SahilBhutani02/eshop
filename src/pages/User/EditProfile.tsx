@@ -24,7 +24,6 @@ const EditProfile: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  console.log(userData, "userData");
 
   const initialValues: ProfileFormValues = {
     fullName: userData?.fullName,
